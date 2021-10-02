@@ -3,7 +3,9 @@ package com.autopartskinmel.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.Toast;
 import com.autopartskinmel.R;
 import com.autopartskinmel.adapter.ItemAdapter;
@@ -11,6 +13,8 @@ import com.autopartskinmel.model.Item;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements ItemAdapter.OnItemClickListener {
+    private ImageView profileIcon;
+
     private RecyclerView popularRecyclerItems, recentRecyclerItems;
     private ItemAdapter itemAdapter;
 
@@ -22,11 +26,14 @@ public class MainActivity extends AppCompatActivity implements ItemAdapter.OnIte
 
         initFields();
 
+        profileIcon.setOnClickListener(view -> openLoginActivity());
+
         buildRecyclerViewOfPopularItems();
         buildRecyclerViewOfRecentItems();
     }
 
     private void initFields() {
+        profileIcon = findViewById(R.id.profile_icon);
         popularRecyclerItems = findViewById(R.id.popular_recycler_items);
         recentRecyclerItems = findViewById(R.id.recent_recycler_items);
     }
@@ -66,5 +73,11 @@ public class MainActivity extends AppCompatActivity implements ItemAdapter.OnIte
     @Override
     public void onItemClick(int position) {
         Toast.makeText(getApplicationContext(), "Item "+position+" clicked.", Toast.LENGTH_SHORT).show();
+    }
+
+
+    //On Icon clicked login will open...
+    private void openLoginActivity() {
+        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
     }
 }
