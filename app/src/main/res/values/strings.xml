@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AutopartsKinmel</string>
+    <string name="popular_items">Popular Items</string>
+    <string name="recent_items">Recent Items</string>
 </resources>

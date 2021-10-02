@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="3dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            tools:text="Item Name"
+            tools:textSize="14sp"
+            android:textSize="14sp"
+            android:padding="3dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/item_image"/>
+
+        <ImageView
+            android:id="@+id/item_image"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_launcher_foreground"
+            app:layout_constraintTop_toBottomOf="@+id/item_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="ContentDescription"/>
+
+        <TextView
+            android:id="@+id/item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:textColor="@color/teal_200"
+            tools:text="Item Price"
+            tools:textSize="12sp"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/item_image"
+            app:layout_constraintStart_toStartOf="@id/item_image"
+            app:layout_constraintEnd_toEndOf="@id/item_image"
+            android:padding="3dp"/>
+
+        <TextView
+            android:id="@+id/item_condition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            tools:text="Item Condition"
+            tools:textSize="12sp"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/item_price"
+            app:layout_constraintStart_toStartOf="@id/item_image"
+            app:layout_constraintEnd_toEndOf="@id/item_image"
+            android:padding="3dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
