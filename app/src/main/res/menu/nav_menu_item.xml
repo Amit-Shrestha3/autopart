@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/parts_amp_accessories">
+        <menu>
+            <item
+                android:id="@+id/car_accessories"
+                android:title="@string/car_accessories"/>
+
+            <item
+                android:id="@+id/car_parts"
+                android:title="@string/car_parts"/>
+
+            <item
+                android:id="@+id/motorcycle_accessories"
+                android:title="@string/motorcycle_accessories"/>
+
+            <item
+                android:id="@+id/motorcycle_helmet"
+                android:title="@string/motorcycle_helmet"/>
+
+            <item
+                android:id="@+id/motorcycle_parts"
+                android:title="@string/motorcycle_parts"/>
+
+            <item
+                android:id="@+id/motorcycle_riding_wear"
+                android:title="@string/motorcycle_riding_wear"/>
+
+            <item
+                android:id="@+id/motorcycle_tyre_and_wheel"
+                android:title="@string/motorcycle_tyre_and_wheel"/>
+
+        </menu>
+    </item>
+
+</menu>

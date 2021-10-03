@@ -16,4 +16,16 @@
     <string name="enter_password">Enter Password</string>
     <string name="login">Login</string>
     <string name="don_t_have_account">Don\'t have account?</string>
+    <string name="parts_amp_accessories"><![CDATA[Parts & Accessories]]></string>
+    <string name="car_accessories">Car - Accessories</string>
+    <string name="car_parts">Car - Parts</string>
+    <string name="motorcycle_accessories">Motorcycle - Accessories</string>
+    <string name="motorcycle_helmet">Motorcycle - Helmet</string>
+    <string name="motorcycle_parts">Motorcycle - Parts</string>
+    <string name="motorcycle_riding_wear">Motorcycle - Riding Wear</string>
+    <string name="motorcycle_tyre_and_wheel">Motorcycle - Tyre and Wheel</string>
+
+    <string name="open">Open Navigation</string>
+    <string name="close">Close Navigation</string>
+    <string name="guest">Guest</string>
 </resources>

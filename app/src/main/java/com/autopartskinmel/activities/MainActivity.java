@@ -1,19 +1,30 @@
 package com.autopartskinmel.activities;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageView;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 import com.autopartskinmel.R;
 import com.autopartskinmel.adapter.ItemAdapter;
 import com.autopartskinmel.model.Item;
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements ItemAdapter.OnItemClickListener {
-    private ImageView profileIcon;
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ItemAdapter.OnItemClickListener {
+    private Toolbar toolbar;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private MaterialCardView profileLayout;
 
     private RecyclerView popularRecyclerItems, recentRecyclerItems;
     private ItemAdapter itemAdapter;
@@ -25,15 +36,30 @@ public class MainActivity extends AppCompatActivity implements ItemAdapter.OnIte
         setContentView(R.layout.activity_main);
 
         initFields();
+        setSupportActionBar(toolbar);
 
-        profileIcon.setOnClickListener(view -> openLoginActivity());
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        //On navigation item clicked...
+        navigationView.setNavigationItemSelectedListener(this);
+
+        profileLayout.setOnClickListener(view -> openLoginActivity());
 
         buildRecyclerViewOfPopularItems();
         buildRecyclerViewOfRecentItems();
     }
 
     private void initFields() {
-        profileIcon = findViewById(R.id.profile_icon);
+        toolbar = findViewById(R.id.toolbar);
+        drawerLayout = findViewById(R.id.drawer_layout);
+
+        navigationView = findViewById(R.id.navigation_view);
+        View header = navigationView.getHeaderView(0);
+        profileLayout = header.findViewById(R.id.image_card_layout);
+
         popularRecyclerItems = findViewById(R.id.popular_recycler_items);
         recentRecyclerItems = findViewById(R.id.recent_recycler_items);
     }
@@ -79,5 +105,33 @@ public class MainActivity extends AppCompatActivity implements ItemAdapter.OnIte
     //On Icon clicked login will open...
     private void openLoginActivity() {
         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.car_accessories){
+            Toast.makeText(this, "Car Accessories", Toast.LENGTH_SHORT).show();
+        }
+        if (item.getItemId() == R.id.car_parts){
+            Toast.makeText(this, "Car Parts", Toast.LENGTH_SHORT).show();
+        }
+        if (item.getItemId() == R.id.motorcycle_accessories){
+            Toast.makeText(this, "Motorcycle Accessories", Toast.LENGTH_SHORT).show();
+        }
+        if (item.getItemId() == R.id.motorcycle_helmet){
+            Toast.makeText(this, "Motorcycle Helmet", Toast.LENGTH_SHORT).show();
+        }
+        if (item.getItemId() == R.id.motorcycle_parts){
+            Toast.makeText(this, "Motorcycle Parts", Toast.LENGTH_SHORT).show();
+        }
+        if (item.getItemId() == R.id.motorcycle_riding_wear){
+            Toast.makeText(this, "Motorcycle Riding Wear", Toast.LENGTH_SHORT).show();
+        }
+        if (item.getItemId() == R.id.motorcycle_tyre_and_wheel){
+            Toast.makeText(this, "Motorcycle Tyre and Wheel", Toast.LENGTH_SHORT).show();
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return false;
     }
 }
