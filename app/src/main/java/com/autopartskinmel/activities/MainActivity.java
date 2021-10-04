@@ -10,8 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import com.autopartskinmel.R;
 import com.autopartskinmel.adapter.ItemAdapter;
@@ -20,11 +24,14 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ItemAdapter.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements TextWatcher, NavigationView.OnNavigationItemSelectedListener, ItemAdapter.OnItemClickListener {
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private MaterialCardView profileLayout;
+
+    private EditText searchField;
+    private ImageView editProfile, searchIcon, searchClear;
 
     private RecyclerView popularRecyclerItems, recentRecyclerItems;
     private ItemAdapter itemAdapter;
@@ -38,15 +45,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         initFields();
         setSupportActionBar(toolbar);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
-                R.string.open, R.string.close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+        handleNavigationEvent();
 
-        //On navigation item clicked...
-        navigationView.setNavigationItemSelectedListener(this);
-
-        profileLayout.setOnClickListener(view -> openLoginActivity());
+        searchField.addTextChangedListener(this);
 
         buildRecyclerViewOfPopularItems();
         buildRecyclerViewOfRecentItems();
@@ -59,7 +60,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.navigation_view);
         View header = navigationView.getHeaderView(0);
         profileLayout = header.findViewById(R.id.image_card_layout);
+        editProfile = header.findViewById(R.id.edit_profile);
 
+        searchField = findViewById(R.id.search_field);
+        searchIcon = findViewById(R.id.search_icon);
+        searchClear = findViewById(R.id.search_bar_clear);
         popularRecyclerItems = findViewById(R.id.popular_recycler_items);
         recentRecyclerItems = findViewById(R.id.recent_recycler_items);
     }
@@ -96,15 +101,67 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return itemArrayList;
     }
 
-    @Override
-    public void onItemClick(int position) {
-        Toast.makeText(getApplicationContext(), "Item "+position+" clicked.", Toast.LENGTH_SHORT).show();
-    }
 
+
+    // all navigation items event will be handled here...
+    private void handleNavigationEvent() {
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        //On navigation item clicked...
+        navigationView.setNavigationItemSelectedListener(this);
+
+        editProfile.setOnClickListener(view -> openEditProfileActivity());
+        profileLayout.setOnClickListener(view -> openLoginActivity());
+    }
 
     //On Icon clicked login will open...
     private void openLoginActivity() {
         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+    }
+
+
+    //On clicked edit profile will open...
+    private void openEditProfileActivity() {
+        startActivity(new Intent(this, EditProfileActivity.class));
+    }
+
+
+
+
+    /* -------- Implemented methods -------- */
+
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        String itemName = searchField.getText().toString();
+
+        if (itemName.isEmpty()){
+            searchIcon.setVisibility(View.VISIBLE);
+            searchClear.setVisibility(View.GONE);
+
+            return;
+        }
+
+        searchIcon.setVisibility(View.GONE);
+        searchClear.setVisibility(View.VISIBLE);
+
+        searchClear.setOnClickListener(view -> {
+            searchField.setText("");
+            searchIcon.setVisibility(View.VISIBLE);
+        });
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+
     }
 
     @Override
@@ -132,6 +189,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
-        return false;
+        return true;
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Toast.makeText(getApplicationContext(), "Item "+position+" clicked.", Toast.LENGTH_SHORT).show();
     }
 }

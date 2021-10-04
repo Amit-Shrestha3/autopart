@@ -28,4 +28,8 @@
     <string name="open">Open Navigation</string>
     <string name="close">Close Navigation</string>
     <string name="guest">Guest</string>
+    <string name="search_items">Search items</string>
+    <string name="update">Update</string>
+    <string name="address_txt">Address:</string>
+    <string name="address">Address</string>
 </resources>

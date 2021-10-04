@@ -146,6 +146,29 @@
         app:layout_constraintEnd_toEndOf="@id/email_field"
         tools:ignore="Autofill"/>
 
+    <TextView
+        android:id="@+id/address_txt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/address_txt"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textSize="17sp"
+        app:layout_constraintTop_toBottomOf="@+id/phone_field"
+        app:layout_constraintStart_toStartOf="@id/email_txt"
+        app:layout_constraintEnd_toEndOf="@id/email_txt"
+        app:layout_constraintBottom_toTopOf="@id/address_field"/>
+
+    <EditText
+        android:id="@+id/address_field"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/address"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/address_txt"
+        app:layout_constraintStart_toStartOf="@id/email_field"
+        app:layout_constraintEnd_toEndOf="@id/email_field"
+        tools:ignore="Autofill"/>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/register_btn"
         android:layout_width="0dp"

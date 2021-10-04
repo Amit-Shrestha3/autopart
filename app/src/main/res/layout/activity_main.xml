@@ -8,15 +8,17 @@
     tools:openDrawer="left"
     tools:context=".activities.MainActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBar"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:elevation="4dp">
 
             <androidx.appcompat.widget.Toolbar
@@ -27,34 +29,105 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/search_view_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/appBar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/popular_items_text"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="40dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/search_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_search"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp"
+                    android:visibility="visible"
+                    tools:ignore="ContentDescription"/>
+
+                <EditText
+                    android:id="@+id/search_field"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:hint="@string/search_items"
+                    android:inputType="text"
+                    android:background="@android:color/transparent"
+                    android:lines="1"
+                    android:layout_weight="1"
+                    tools:ignore="Autofill"/>
+
+                <ImageView
+                    android:id="@+id/search_bar_clear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_clear"
+                    android:layout_gravity="end|center"
+                    android:layout_margin="5dp"
+                    android:visibility="gone"
+                    tools:ignore="ContentDescription"/>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
         <TextView
+            android:id="@+id/popular_items_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/popular_items"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             android:textSize="17sp"
+            app:layout_constraintTop_toBottomOf="@id/search_view_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/popular_recycler_items"
             android:layout_marginStart="5dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/popular_recycler_items"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/popular_items_text"
+            app:layout_constraintStart_toStartOf="@id/popular_items_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/recent_items_text"/>
 
         <TextView
+            android:id="@+id/recent_items_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/recent_items"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             android:textSize="17sp"
+            app:layout_constraintTop_toBottomOf="@id/popular_recycler_items"
+            app:layout_constraintStart_toStartOf="@id/popular_items_text"
+            app:layout_constraintBottom_toTopOf="@id/recent_recycler_items"
             android:layout_marginTop="10dp"
             android:layout_marginStart="5dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recent_recycler_items"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/recent_items_text"
+            app:layout_constraintStart_toStartOf="@id/popular_recycler_items"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
